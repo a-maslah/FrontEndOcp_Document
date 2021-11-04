@@ -7,7 +7,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontEndStage';
+  public select: boolean=false;
 
 
-
+  selected() {
+    this.select=true;
+  }
 }
