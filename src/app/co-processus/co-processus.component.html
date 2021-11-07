@@ -1,7 +1,7 @@
 <ng-template #other_content>
   <div class="text-center font-weight-bold my-5">choisir le service !!!</div>
 </ng-template>
-<div class="container">
+<div class="container" id="main-container">
 
   <div class="col-xs-12 ">
     <nav>
@@ -83,7 +83,7 @@
         <form #addForm="ngForm" (ngSubmit)="onAddProcessus(addForm)">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" ngModel name="Name" class="form-control" id="name" placeholder="Name"
+            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name"
                    required>
           </div>
           <div class="form-group">
@@ -92,23 +92,19 @@
                    required>
           </div>
           <div class="form-group">
-            <label for="username1">Username</label>
-            <input type="text" ngModel name="username" class="form-control" id="username1" placeholder="username"
-                   required>
+            <label for="FormControlSelect1">Service </label>
+            <select   name="service" [(ngModel)]="service"  class="form-control" id="FormControlSelect1" >
+              <option selected disabled>selectionner le service </option>
+              <option *ngFor="let s of serviceList" [ngValue]="s">{{s.name}}</option>
+            </select>
           </div>
+
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Password"
-                   required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
-          </div>
-          <div class="form-group">
-            <label for="imageUrl">Image Url</label>
-            <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="imageUrl"
-                   required>
+            <label for="FormControlSelect1">Pilote de processus </label>
+            <select   name="service" class="form-control" id="FormControlSelect2" >
+              <option selected disabled>selectionner le pilote </option>
+              <option  ></option>
+            </select>
           </div>
           <div class="modal-footer">
             <button type="button" id="add-processus-form" class="btn btn-secondary" data-dismiss="modal">Close</button>

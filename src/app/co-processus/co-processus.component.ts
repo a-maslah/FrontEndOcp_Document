@@ -15,26 +15,29 @@ import {User} from "../modal/user";
   templateUrl: './co-processus.component.html',
   styleUrls: ['./co-processus.component.css']
 })
+
+
+
 export class CoProcessusComponent implements OnInit {
   public processusList: Processus[];
   public editProcessus!: Processus;
   public deleteProcessus!: Processus;
-  public serviceList: Service[]=[];
-  public currentService!:Service;
-  public choix : boolean= false;
-  public manage! : Mange;
+  public serviceList: Service[] = [];
+  public currentService!: Service;
+  public choix: boolean = false;
+  public manage!: Mange;
+  public service!:Service;
 
 
-  constructor(private processusService: ProcessusService, private senderService : SenderService,
+  constructor(private processusService: ProcessusService, private senderService: SenderService,
               private serviceService: ServiceService) {
-    this.processusList=[];
+    this.processusList = [];
 
   }
 
-  ngOnInit()  {
+  ngOnInit() {
     this.getService();
   }
-
 
 
   // private getService():void {
@@ -42,40 +45,41 @@ export class CoProcessusComponent implements OnInit {
   // }
 
 
-  public getService(): void{
+  public getService(): void {
     this.serviceService.getService().subscribe(
-      (response)=>{
-        this.serviceList=response;
+      (response) => {
+        this.serviceList = response;
       },
-      (error :HttpErrorResponse) =>{
+      (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )
   }
 
 
+  public onAddProcessus(addForm: NgForm): void {
 
-  public onAddProcessus(addForm: NgForm): void{
+    console.log(addForm.value);
     // @ts-ignore
     document.getElementById('add-processus-form').click();
     this.processusService.addProcessus(addForm.value).subscribe(
       (response: Processus) => {
-        console.log(response);
+
         this.getProcessusByService(this.currentService);
         addForm.reset();
       },
-      (error : HttpErrorResponse) => {
+      (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
   }
 
-  private getProcessusByService(service: Service) : void{
+  private getProcessusByService(service: Service): void {
     this.processusService.getProcessusByService(service).subscribe(
-      (response)=>{
-        this.processusList=response;
+      (response) => {
+        this.processusList = response;
       },
-      (error:HttpErrorResponse) => {
+      (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )
@@ -83,13 +87,19 @@ export class CoProcessusComponent implements OnInit {
 
   onGetProcessus(s: Service) {
 
-    this.currentService=s;
+    this.currentService = s;
     this.getProcessusByService(s);
-    this.choix=true;
+    this.choix = true;
   }
 
-  onOpenModalAddProcessus() {
-
-
+  public onOpenModalAddProcessus(): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#addProcessusModal');
+    container!.appendChild(button);
+    button.click();
   }
 }
