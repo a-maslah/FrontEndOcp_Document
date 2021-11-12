@@ -10,7 +10,5 @@ export class AppComponent {
   public select: boolean=false;
 
 
-  selected() {
-    this.select=true;
-  }
+
 }

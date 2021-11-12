@@ -12,6 +12,7 @@ import { CoServicesComponent } from './co-services/co-services.component';
 import { CoDocumentsComponent } from './co-documents/co-documents.component';
 import { CoProcessusComponent } from './co-processus/co-processus.component';
 import {CoUsersComponent} from "./co-users/co-users.component";
+import {AuthService} from "./services/AuthService";
 
 
 
@@ -36,7 +37,7 @@ import {CoUsersComponent} from "./co-users/co-users.component";
     ,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

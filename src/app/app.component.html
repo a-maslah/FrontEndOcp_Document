@@ -22,7 +22,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+        <a routerLinkActive="active" routerLink="/home" class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a  class="nav-link" href="#">Utillisateur</a>
@@ -46,7 +46,8 @@
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <button routerLink="/login" class="btn btn-light ms-3" >Login</button>
+    <button routerLinkActive="active" routerLink="/login" class="btn btn-light ms-3" >Login</button>
+    <button  class="btn btn-light ms-3" >Logout</button>
   </div>
 </nav>
 
