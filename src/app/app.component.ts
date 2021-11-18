@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {TokenService} from "./services/security/token.service";
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontEndStage';
-  public select: boolean=false;
-
-
+  public select: boolean = false;
 
 }
+

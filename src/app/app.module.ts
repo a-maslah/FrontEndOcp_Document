@@ -13,6 +13,9 @@ import { CoDocumentsComponent } from './co-documents/co-documents.component';
 import { CoProcessusComponent } from './co-processus/co-processus.component';
 import {CoUsersComponent} from "./co-users/co-users.component";
 import {AuthService} from "./services/AuthService";
+import { NavbarComponent } from './navbar/navbar.component';
+import { MenuComponent } from './menu/menu.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -25,7 +28,10 @@ import {AuthService} from "./services/AuthService";
     CoServicesComponent,
     CoDocumentsComponent,
     CoProcessusComponent,
-    CoUsersComponent
+    CoUsersComponent,
+    NavbarComponent,
+    MenuComponent,
+    HomeComponent
 
 
   ],

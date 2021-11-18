@@ -7,32 +7,23 @@ import {CoUsersComponent} from "./co-users/co-users.component";
 import {CoServicesComponent} from "./co-services/co-services.component";
 import {CoProcessusComponent} from "./co-processus/co-processus.component";
 import {CoDocumentsComponent} from "./co-documents/co-documents.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-  {
-    path:"users",
-    component: CoUsersComponent
-  },
-  {
-    path:"nn",
-    component: AppComponent
-  },
-  {
-    path:"login",
-    component: LoginComponent
-  },
-  {
-    path:"services",
-    component: CoServicesComponent
-  },
-  {
-    path:"processus",
-    component: CoProcessusComponent
-  },
-  {
-    path:"documents",
-    component: CoDocumentsComponent
-  }
+
+  { path:"", component: HomeComponent },
+
+  { path:"users", component: CoUsersComponent},
+
+  { path:"nn", component: AppComponent },
+
+  { path:"login", component: LoginComponent},
+
+  { path:"services", component: CoServicesComponent },
+
+  { path:"processus", component: CoProcessusComponent },
+
+  { path:"documents",  component: CoDocumentsComponent }
 ];
 
 @NgModule({
