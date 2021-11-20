@@ -16,6 +16,7 @@ import {AuthService} from "./services/AuthService";
 import { NavbarComponent } from './navbar/navbar.component';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
+import {interceptorProvider} from "./intercepteur/user-intercepteur.service";
 
 
 
@@ -43,7 +44,7 @@ import { HomeComponent } from './home/home.component';
     ,
     ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

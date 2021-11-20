@@ -15,18 +15,13 @@ export class LoginComponent implements OnInit {
 
   username!: string ;
   password!: string;
- // console
-
   errorMessage!: string;
-  // errorMessage = "Invalid";
-  // successMessage!: string
-  // invalidLogin = false;
-  // loginSuccess = false;
-
   isLogged = false;
   isLoginFail = false;
   loginUser !: LoginUser;
   roles: string[]=[];
+
+
 
 
   constructor(

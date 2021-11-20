@@ -25,9 +25,10 @@ export class CoUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.getUsers()
+    this.getUsers();
   }
+
+
   public getUsers(): void{
     this.userService.getUsers().subscribe(
       (response: User[]) => {
