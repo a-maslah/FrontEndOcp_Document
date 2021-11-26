@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
-<div class="container mw-100 " >
+
 
 <div class="text-center" *ngIf="isLogged; else loggedOut ">
   <h2> Ya has iniciado session</h2>
 </div>
 
-
+<div class="container mw-100 " >
 <ng-template #loggedOut>
 <div class=" container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
   <div class="card card0 border-0">
