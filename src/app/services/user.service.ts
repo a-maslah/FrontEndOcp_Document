@@ -12,12 +12,13 @@ export class UserService {
   private host = environment.host;
   constructor(private http:HttpClient) {}
 
+
   public getUsers(): Observable<User[]>{
     return this.http.get<User[]>(`${this.host}/user/all`);
   }
 
   public addUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/add`, user);
+    return this.http.post<User>(`${this.host}/user/new`, user);
   }
 
   updateUser(user: User):Observable<User> {
@@ -27,4 +28,6 @@ export class UserService {
   deleteUser(userId: number):Observable<void> {
     return this.http.delete<void>(`${this.host}/user/delete/${userId}`);
   }
+
+
 }

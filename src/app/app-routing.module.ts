@@ -9,28 +9,41 @@ import {CoProcessusComponent} from "./co-processus/co-processus.component";
 import {CoDocumentsComponent} from "./co-documents/co-documents.component";
 import {HomeComponent} from "./home/home.component";
 import {UserGuardService as guard} from "./guards/user-guard.service";
+import {GestionComponent} from "./gestion/gestion.component";
+import {TestoComponent} from "./testo/testo.component";
 
 
 const routes: Routes = [
 
-  { path:"", component: HomeComponent },
+  { path:"home", component: HomeComponent },
 
-  { path:"users", component: CoUsersComponent,
-    canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+
 
   { path:"nn", component: AppComponent },
 
   { path:"login", component: LoginComponent},
 
-  { path:"services", component: CoServicesComponent,
-    canActivate: [guard], data: {expectedRole : ['admin']} },
+  { path:"testo", component: TestoComponent},
+
+  { path:"gestion", component: GestionComponent,
+    canActivate: [guard], data: {expectedRole : ['admin']} ,
+    children: [
+      { path:"processus", component: CoProcessusComponent,
+        canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+      { path:"documents",  component: CoDocumentsComponent,
+        canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+      { path:"users", component: CoUsersComponent,
+        canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+      { path:"services", component: CoServicesComponent,
+        canActivate: [guard], data: {expectedRole : ['admin']} }
+
+    ]
+  }
 
 
-  { path:"processus", component: CoProcessusComponent,
-    canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
 
-  { path:"documents",  component: CoDocumentsComponent,
-    canActivate: [guard], data: {expectedRole : ['admin' , 'user']} }
+
+
 ];
 
 @NgModule({

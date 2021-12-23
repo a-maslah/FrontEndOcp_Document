@@ -18,6 +18,10 @@ export class ProcessusService {
     return this.http.post<Processus[]>(`${this.host}/processus/by-service`,service);
   }
 
+  public getAllProcessus(): Observable<Processus[]> {
+    return this.http.get<Processus[]>(`${this.host}/processus/all`);
+  }
+
   public addProcessus(processus: Processus): Observable<Processus> {
     return this.http.post<Processus>(`${this.host}/processus/add`, processus);
   }

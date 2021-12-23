@@ -40,9 +40,10 @@ export class CoProcessusComponent implements OnInit {
   }
 
 
-  // private getService():void {
-  //   this.serviceList=this.senderService.tempServiceList;
-  // }
+   // private getService1():void {
+   //   this.serviceList=this.senderService.tempServiceList;
+   // }
+  serviceSelected!: Service;
 
 
   public getService(): void {

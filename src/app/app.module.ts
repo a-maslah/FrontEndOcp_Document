@@ -17,6 +17,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import {interceptorProvider} from "./intercepteur/user-intercepteur.service";
+import { GestionComponent } from './gestion/gestion.component';
+import {NgSelectModule} from "@ng-select/ng-select";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from "@angular/material/icon";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import { TestoComponent } from './testo/testo.component';
 
 
 
@@ -32,18 +44,27 @@ import {interceptorProvider} from "./intercepteur/user-intercepteur.service";
     CoUsersComponent,
     NavbarComponent,
     MenuComponent,
-    HomeComponent
+    HomeComponent,
+    GestionComponent,
+    TestoComponent
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,HttpClientModule,FormsModule,
-    NgbModule,
-    FormsModule
-    ,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule, HttpClientModule, FormsModule,
+        NgbModule,
+        FormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatTableModule,
+
+        MatSelectModule,
+        MatPaginatorModule,
+        MatSortModule
+        ,
+        ReactiveFormsModule, NgSelectModule, NgMultiSelectDropDownModule, BrowserAnimationsModule, MatIconModule
+    ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })

@@ -1,58 +1,233 @@
-<app-navbar></app-navbar>
-<div class="container mw-100 " >
-<div class="row">
-<div class="col-sm-2 my-5">
-  <app-menu></app-menu>
-</div>
-<div class="col-sm-10 my-5">
 
-<div class="container">
+
+<div class="container" id="main-container">
     <div class="col-xs-12 ">
-      <nav>
+<!--      <nav>-->
 
-        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-          <a  *ngFor="let s of serviceList"  class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"  aria-selected="false" >{{s.name}}</a>
 <!--        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">-->
-<!--          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Option1</a>-->
-<!--          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Option2</a>-->
-<!--          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Option3</a>-->
-<!--          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Option4</a>-->
+<!--          <a  *ngFor="let s of serviceList"  class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"  aria-selected="false" >{{s.name}}</a>-->
+<!--&lt;!&ndash;        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Option1</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Option2</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Option3</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Option4</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
 <!--        </div>-->
-        </div>
-      </nav>
+<!--      </nav>-->
 
 
 
-      <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+      <div class="tab-content px-3 px-sm-0" id="nav-tabContent">
 <!--        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">-->
 <!--          Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.-->
 <!--        </div>-->
-<div class="row mx-0">
+        <div><h1 class="text-dark">Liste des services :</h1><br></div>
+        <section id="cards" class="container-fluid pb-2">
+        <div class="row d-inline-flex">
+<!--        <div *ngFor="let s of serviceList">-->
+<!--          <div class="col-md-3">-->
+<!--            <div class="card">-->
+<!--              <div class="card-body">-->
+<!--                <h3 class="card-title">{{s.name}}</h3>-->
+<!--                <p class="card-text">{{s.description}}.</p>-->
+<!--                <a href="#" class="btn btn-primary btn-sm">Afficher plus</a>-->
 
-  <div class="col-md-3" >
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"> treatment</h5>
-        <p class="card-text"> content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<!--                <div class="float-right btn-group btn-group-sm">-->
+<!--                  <a (click)="onOpenModalService(s,'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip"-->
+<!--                     data-original-title="Edit"><i class="fa fa-pencil"></i> </a>-->
+<!--                  <a (click)="onOpenModalService(s,'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"-->
+<!--                     data-original-title="Delete"><i class="fa fa-times"></i></a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+
+          <div *ngFor="let s of serviceList" class="col-6 col-sm-4 col-md-3 p-2">
+            <div class="card border-primary h-100">
+              <div class="card-body d-flex flex-column align-items-start">
+                <h4 class="card-title text-primary">{{s.name}}</h4>
+                <p class="card-text text-light">{{s.description}}.</p>
+                <a href="#" class="btn btn-primary btn-sm mt-auto">Afficher plus</a>
+                <br>
+                <div class="float-right btn-group btn-group-sm">
+                    <a (click)="onOpenModalService(s,'edit')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
+                                       data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                    <a (click)="onOpenModalService(s,'delete')" class="btn btn-danger tooltips" data-placement="top" data-toggle="tooltip"
+                                       data-original-title="Delete"><i class="fa fa-times"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        </section>
+
+        <div class=" d-flex  text-center  ">
+          <button (click)="onOpenModalService(null,'add')" class="btn btn-light border-primary border-8 "
+                  ><i class="" style="color: Dodgerblue;"></i> Ajouter Service</button>
+        </div>
+
+</div>
+
+      </div>
+
+</div>
+
+
+<!-- Modal add service -->
+<div class="modal fade" id="addServiceModal" tabindex="-1" role="dialog" aria-labelledby="addServiceModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addServiceModalLabel">Ajouter Service</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddService(addForm)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name"
+                   required>
+          </div>
+          <div class="form-group">
+            <label for="description1">Description</label>
+            <input type="text" ngModel name="description" class="form-control" id="description1" placeholder="description"
+                   required>
+          </div>
+<!--          <div class="form-group">-->
+<!--            <label for="FormControlSelect1">Service </label>-->
+<!--            <select   name="service" [(ngModel)]="service"  class="form-control" id="FormControlSelect1" >-->
+<!--              <option selected disabled>selectionner le service </option>-->
+<!--              <option *ngFor="let s of serviceList" [ngValue]="s">{{s.name}}</option>-->
+<!--            </select>-->
+<!--          </div>-->
+
+<!--          <div class="form-group">-->
+<!--            <label for="FormControlSelect1">Pilote de processus </label>-->
+<!--            <select   name="service" class="form-control" id="FormControlSelect1" >-->
+<!--              <option selected disabled>selectionner le pilote </option>-->
+<!--              <option  ></option>-->
+<!--            </select>-->
+<!--          </div>-->
+          <div class="modal-footer">
+            <button type="button" id="add-service-form" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-secondary">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="col-md-3 " >
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+</div>
+
+<!-- Modal delete service -->
+<div class="modal fade" id="deleteServiceModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Delete Service</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete service {{deleteService?.name }}? </p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteService(deleteService.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
       </div>
     </div>
   </div>
+</div>
+
+
+
+<!--modal edit service-->
+
+
+<div class="modal fade" id="updateServiceModal" tabindex="-1" role="dialog" aria-labelledby="updateServiceModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateServiceModalLabel">Edit
+          Service {{editService?.name }} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ngModel="{{editService?.name}}" name="name" class="form-control"
+                   aria-describedby="emailHelp" placeholder="Name">
+          </div>
+
+          <input type="hidden" ngModel="{{editService?.id}}" name="id" class="form-control" id="id" placeholder="id">
+
+          <div class="form-group">
+            <label for="description2">description</label>
+            <input type="text" ngModel="{{editService?.description}}" name="description" class="form-control" id="description2"
+                   placeholder="descritption">
+          </div>
+
+
+<!--          <div  *ngFor="let p of allProcessusList"  class="custom-control custom-switch">-->
+<!--            <input  type="checkbox" class="custom-control-input" id="{{p.id}}" [attr.checked] = "checkProcessus(editService.processusList,p.id) ? 'checked' : null" >-->
+<!--            <label   class="custom-control-label" for="{{p.id}}">{{p.name}}</label>-->
+<!--          </div>-->
+
+<!--          <ng-multiselect-dropdown [placeholder]="'select processus'"-->
+<!--                                   [data]="allProcessusList"-->
+<!--                                   [(ngModel)]="selectedItems"-->
+<!--                                   name="processusList"-->
+<!--                                   [settings]="dropdownSettings"-->
+<!--                                   (onSelect)="onItemSelect($event)"-->
+<!--                                   (onDeSelect)="onItemSelect($event)"-->
+<!--                                   (onSelectAll)="onSelectAll($event)"-->
+<!--                                   >-->
+
+<!--          </ng-multiselect-dropdown>-->
+
+<!--          <ng-select [items]="allProcessusList"-->
+<!--                     bindLabel="name"-->
+<!--                     bindValue="id"-->
+<!--                     [multiple]="true"-->
+<!--                     placeholder="Select cities"-->
+
+<!--                     [(ngModel)]="">-->
+<!--          </ng-select>-->
+
+<!--          <ng-select [items]="allProcessusList"-->
+<!--                     bindLabel="name"-->
+<!--                     placeholder="Select Category"-->
+<!--                     appendTo="body"-->
+<!--                     [multiple]= "true"-->
+<!--                     [(ngModel)]="editService.processusList">-->
+
+<!--          </ng-select>-->
+
+          <div class="modal-footer">
+            <button type="button" id="" data-dismiss="modal" class="btn btn-danger">Close</button>
+            <button (click)="onUpdateService(editForm.value)" data-dismiss="modal" class="btn btn-secondary">Save changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
-      </div>
 
-</div>
-</div>
-</div>
-</div>
+
+
+

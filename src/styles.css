@@ -1,5 +1,60 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
 /* You can add global styles to this file, and also import other style files */
 .border-8{
   border-style:solid;
   border-width: 8px;
 }
+
+body,
+html {
+  height: 100%;
+}
+
+.bg_accueil {
+  /* The image used */
+  background-image: url("photos/OCP accueil.jpg");
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg {
+  /* The image used */
+  /*background-image: url("photos/background.jpg");*/
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(241, 243, 247);
+}
+
+
+/*body {*/
+/*  background-image: linear-gradient(#FFFFFF, rgb(255, 122, 89));*/
+/*}*/
+
+
+/*#leftHalf {*/
+/*  background:  rgb(198, 57, 89);*/
+/*  width: 20%;*/
+/*  position: absolute;*/
+/*  left: 0px;*/
+/*  height: 100%;*/
+/*}*/
+/*#rightHalf {*/
+/*  background:rgb(57, 122, 89);*/
+/*  width: 80%;*/
+/*  position: absolute;*/
+/*  right: 0px;*/
+/*  height: 100%;*/
+/*}*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
