@@ -23,7 +23,8 @@ const routes: Routes = [
 
   { path:"login", component: LoginComponent},
 
-  { path:"testo", component: TestoComponent},
+  { path:"testo", component: TestoComponent ,
+    canActivate: [guard], data: {expectedRole : ['admin']}},
 
   { path:"gestion", component: GestionComponent,
     canActivate: [guard], data: {expectedRole : ['admin']} ,

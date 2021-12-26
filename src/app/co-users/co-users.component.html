@@ -52,11 +52,20 @@
                  <input matInput placeholder="search" autocomplete="off" (keyup)="filterData($event)">
                </mat-form-field>
 
-               <mat-form-field appearance="fill" class="mx-3">
-                 <mat-select >
-                   <mat-option  *ngFor="let p1 of processusList"   >{{p1.name}}</mat-option>
+               <mat-form-field appearance="fill">
+                 <mat-label>Select processus</mat-label>
+                 <mat-select [(ngModel)]="processusSelected" (ngModelChange)="onGetUsers($event)">
+                   <mat-option *ngFor="let p1 of processusList" [value]="p1" >
+                     {{p1.name}}
+                   </mat-option>
                  </mat-select>
                </mat-form-field>
+
+<!--               <mat-form-field appearance="fill" class="mx-3">-->
+<!--                 <mat-select >-->
+<!--                   <mat-option  *ngFor="let p1 of processusList"   >{{p1.name}}</mat-option>-->
+<!--                 </mat-select>-->
+<!--               </mat-form-field>-->
              </div>
 
               <table mat-table [dataSource]="dataSource" class=" table table-striped table-hover  mat-elevation-z8">

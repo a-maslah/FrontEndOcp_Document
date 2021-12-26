@@ -79,6 +79,7 @@ export class CoUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
+    this.getProcessus();
 
 
     this.rolesList=['admin','user'];
@@ -91,6 +92,8 @@ export class CoUsersComponent implements OnInit {
     this.processusService.getAllProcessus().subscribe(
       (response) => {
         this.processusList = response;
+        console.log("processus: ")
+        console.log(this.processusList)
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -222,6 +225,7 @@ export class CoUsersComponent implements OnInit {
   //     return `with: ${reason}`;
   //   }
   // }
+  processusSelected!: Processus;
 
 
   changeUser($event: Event) {
@@ -242,5 +246,9 @@ console.log(this.user1)
       return item.processus.toLowerCase() == $event.value.toLowerCase();
     })
     this.dataSource = new MatTableDataSource(filterData);
+  }
+
+  onGetUsers(p: Processus) {
+      this.dataSource.data
   }
 }

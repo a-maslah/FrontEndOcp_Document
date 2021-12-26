@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
         this.roles = response.authorities;
         this.dataLogged.changeLogged(this.isLogged);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },
       error => {
         this.isLogged = false;

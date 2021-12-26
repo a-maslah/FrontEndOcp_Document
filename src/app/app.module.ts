@@ -29,6 +29,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import { TestoComponent } from './testo/testo.component';
+import {SenderService} from "./services/sender.service";
 
 
 
@@ -46,7 +47,8 @@ import { TestoComponent } from './testo/testo.component';
     MenuComponent,
     HomeComponent,
     GestionComponent,
-    TestoComponent
+    TestoComponent,
+
 
 
   ],

@@ -1,52 +1,52 @@
-<div class="container">
+<div class="container" id="main-container">
   <div class="row">
     <div class="col-xs-12 ">
       <div class="row ml-1"><h1>Fiches Processus</h1></div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select processus</mat-label>
+
+        <mat-select [(ngModel)]="processusIdSelected" (ngModelChange)="onGetFiles($event)">
+          <mat-option selected="" [value]=0 >All</mat-option>
+          <mat-option *ngFor="let p1 of processusList" [value]="p1.id" >
+            {{p1.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <br>
       <nav>
         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Documents Approuvés</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Documents Non approuvés</a>
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Documents Non approuvés</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Documents Approuvés</a>
             </div>
       </nav>
+
+
+
       <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 
+        <section id="cards" class="container pb-2">
         <div class="row ">
 
-          <div class="col-md-3 mb-2">
+
+
+
+
+          <div  *ngFor="let file of fileInfos | async" class="col-md-3 mb-2">
             <div class="card">
               <div class="card-body">
-                <h2 class="card-title">Document 1</h2>
-                <p class="card-text">Description Document 1.</p>
-                <a href="#" class="btn btn-primary"><span class="fa fa-download"></span>Download</a>
-                <a href="#" class="btn btn-danger"><span class="fa fa-trash"></span>Delete</a>
+                <h2 class="card-title">{{file.name}}</h2>
+                <p class="card-text">description file.</p>
+                <a href="{{ file.url }}" class="btn btn-primary"><span class="fa fa-download"></span>Download</a>
+
               </div>
+
             </div>
           </div>
 
 
-          <div class="col-md-3 mb-2">
-            <div class="card">
-              <div class="card-body">
-                <h2 class="card-title">Document 2</h2>
-                <p class="card-text">Description Document 2.</p>
-                <a href="#" class="btn btn-primary"><span class="fa fa-download"></span>Download</a>
-                <a href="#" class="btn btn-danger"><span class="fa fa-trash"></span>Delete</a>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="col-md-3 mb-2">
-            <div class="card">
-              <div class="card-body">
-                <h2 class="card-title">Document 3</h2>
-                <p class="card-text">Description Document 3.</p>
-                <a href="#" class="btn btn-primary"><span class="fa fa-download"></span>Download</a>
-                <a href="#" class="btn btn-danger"><span class="fa fa-trash"></span>Delete</a>
-              </div>
-            </div>
-          </div>
 
 
 <!--          <div class="col-md-3 mb-2">-->
@@ -72,6 +72,12 @@
 <!--          </div>-->
 
         </div>
+        </section>
+
+        <div class=" d-flex  text-center  ">
+          <button (click)="onOpenModalAddDocument()" class="btn btn-light border-primary border-8 "
+          ><i class="" style="color: Dodgerblue;"></i> Ajouter Document</button>
+        </div>
 
 
       </div>
@@ -81,3 +87,60 @@
 </div>
 
 
+<div class="modal fade" id="addDocumentModal" tabindex="-1" role="dialog" aria-labelledby="addDocumentModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addDocumentModalLabel">Ajouter un document</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="upload(addForm)">
+          <div class="form-group">
+            <label class="btn btn-default p-0">
+              <input type="file" (change)="selectFile($event)" />
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" [(ngModel)]="dataFile.description" name="description" class="form-control" id="description" placeholder="description"
+                   required>
+          </div>
+
+
+          <div class="form-group">
+            <label for="FormControlSelect1">Processus </label>
+            <select   name="processus" [(ngModel)]="processusCreate"  class="form-control" id="FormControlSelect1" >
+              <option selected disabled>select processus </option>
+              <option *ngFor="let p of processusList" [ngValue]="p">{{p.name}}</option>
+            </select>
+          </div>
+
+<!--          <div class="form-group">-->
+<!--            <label for="FormControlSelect1">Service </label>-->
+<!--            <select   name="service" [(ngModel)]="service"  class="form-control" id="FormControlSelect1" >-->
+<!--              <option selected disabled>selectionner le service </option>-->
+<!--              <option *ngFor="let s of serviceList" [ngValue]="s">{{s.name}}</option>-->
+<!--            </select>-->
+<!--          </div>-->
+
+<!--          <div class="form-group">-->
+<!--            <label for="FormControlSelect1">Pilote de processus </label>-->
+<!--            <select   name="service" class="form-control" id="FormControlSelect2" >-->
+<!--              <option selected disabled>selectionner le pilote </option>-->
+<!--              <option  ></option>-->
+<!--            </select>-->
+<!--          </div>-->
+
+          <div class="modal-footer">
+            <button type="button" id="add-document-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
