@@ -9,6 +9,7 @@ import {SenderService} from "../services/sender.service";
 import {Mange} from "../Methodes/mange";
 import {NgForm} from "@angular/forms";
 import {User} from "../modal/user";
+import {TokenService} from "../services/security/token.service";
 
 @Component({
   selector: 'app-co-processus',
@@ -28,15 +29,26 @@ export class CoProcessusComponent implements OnInit {
   public manage!: Mange;
   public service!:Service;
 
+  isAdmin = false;
+  roles!: string[]
+
 
   constructor(private processusService: ProcessusService, private senderService: SenderService,
-              private serviceService: ServiceService) {
+              private serviceService: ServiceService,
+              private tokenService: TokenService) {
     this.processusList = [];
 
   }
 
   ngOnInit() {
     this.getService();
+
+    this.roles=this.tokenService.getAuthorities();
+    this.roles.forEach(role=>{
+
+      if (role=== 'ROLE_ADMIN')
+        this.isAdmin=true;
+    })
   }
 
 
@@ -66,7 +78,7 @@ export class CoProcessusComponent implements OnInit {
     this.processusService.addProcessus(addForm.value).subscribe(
       (response: Processus) => {
 
-        this.getProcessusByService(this.currentService);
+        this.getProcessusByService(this.serviceSelected);
         addForm.reset();
       },
       (error: HttpErrorResponse) => {

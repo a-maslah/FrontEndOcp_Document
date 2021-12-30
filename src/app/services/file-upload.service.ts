@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {DataFile} from "../modal/data-file";
 import {Service} from "../modal/service";
 import {Processus} from "../modal/processus";
+import {Approve} from "../modal/approve";
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +39,21 @@ export class FileUploadService {
   // public getFilesByTypeDoc(type_doc:string): Observable<any> {
   //   return this.http.post<any>(`${this.baseUrl}/resources/filestype`,type_doc);
   // }
-   getFilesByTypeDoc(type_doc:string):Observable<any> {
-    return this.http.get(`${this.baseUrl}/resources/filestype/${type_doc}`);
+   getFilesByTypeDoc(dataFile: DataFile):Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/resources/filestype/`,dataFile);
   }
 
   getFilesByTypeDocAndProcessus(dataFile: DataFile):Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/resources/filesprocessus/`,dataFile);
+  }
+
+  onApprove (approve: Approve): Observable<any>{
+    console.log("babafood");
+    //console.log(JSON.parse(id,))
+    console.log(approve)
+
+     return this.http.post<any>(`${this.baseUrl}/resources/approve`,approve);
+
+
   }
 }

@@ -7,6 +7,9 @@ import {DataFile} from "../modal/data-file";
 import {SenderService} from "../services/sender.service";
 import {Processus} from "../modal/processus";
 import {ProcessusService} from "../services/processus.service";
+import {Approve} from "../modal/approve";
+import {User} from "../modal/user";
+
 
 @Component({
   selector: 'app-co-documents',
@@ -36,7 +39,8 @@ export class CoDocumentsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProcessus();
     this.dataFile.type_doc=this.sender.getMessage();
-    this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile.type_doc);
+
+    this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile);
 
     console.log("type document : " + this.dataFile.type_doc)
 
@@ -82,8 +86,7 @@ export class CoDocumentsComponent implements OnInit {
               this.progress = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
-
-              this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile.type_doc);
+              this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile);
             }
           },
           (err: any) => {
@@ -133,9 +136,51 @@ export class CoDocumentsComponent implements OnInit {
   onGetFiles(processusId: number) {
     this.dataFile.processusId=processusId;
     if (this.processusIdSelected==0)
-      this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile.type_doc);
+      this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile);
     else
     this.fileInfos = this.uploadService.getFilesByTypeDocAndProcessus(this.dataFile);
 
+
+  }
+
+  changeApprove(app: boolean) {
+    this.dataFile.approved=app;
+    this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile);
+  }
+  approve!: Approve;
+  id!:string
+  onApprove(url:any) {
+    let ids :string[] = url.split('/')
+ //    this.id = ids[5]
+
+
+   // console.log(this.id);
+    this.approve= new Approve();
+
+    this.approve.id=ids[5];
+
+
+    // let varr ={
+    //   id: id,
+    // }
+    //
+    // const obj = JSON.parse(JSON.stringify(varr));
+    // console.log(obj)
+    console.log(this.approve.id+"    bbb");
+
+
+    this.uploadService.onApprove(this.approve).subscribe(
+      (response: any) => {
+
+        console.log(response);
+
+      },
+      (error : HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
+
+    this.fileInfos = this.uploadService.getFilesByTypeDoc(this.dataFile);
   }
 }

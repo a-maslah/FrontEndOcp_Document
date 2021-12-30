@@ -3,90 +3,81 @@
 </ng-template>
 
 
-<div class="container" id="main-container">
-
-  <div class="col-xs-12 ">
+<div class="container-fluid" id="main-container">
 
 
-<!--    <nav>-->
-<!--      <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">-->
-<!--        <a [ngClass]="s==currentService?'active':''" *ngFor="let s of serviceList" class="nav-item nav-link"-->
-<!--           id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"-->
-<!--           aria-selected="false" (click)="onGetProcessus(s)">{{s.name}}</a>-->
-<!--        &lt;!&ndash;          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Service2</a>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Service3</a>&ndash;&gt;-->
-<!--        &lt;!&ndash;          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Service4</a>&ndash;&gt;-->
-<!--      </div>-->
-<!--    </nav>-->
+  <!--    <nav>-->
+  <!--      <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">-->
+  <!--        <a [ngClass]="s==currentService?'active':''" *ngFor="let s of serviceList" class="nav-item nav-link"-->
+  <!--           id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"-->
+  <!--           aria-selected="false" (click)="onGetProcessus(s)">{{s.name}}</a>-->
+  <!--        &lt;!&ndash;          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Service2</a>&ndash;&gt;-->
+  <!--        &lt;!&ndash;          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Service3</a>&ndash;&gt;-->
+  <!--        &lt;!&ndash;          <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Service4</a>&ndash;&gt;-->
+  <!--      </div>-->
+  <!--    </nav>-->
 
-<!--    <div *ngIf="choix;else other_content">-->
+  <!--    <div *ngIf="choix;else other_content">-->
 
 
-      <div class="tab-content py-3 px-sm-0" id="nav-tabContent">
+  <!--    <div class="tab-content py-3 px-sm-0" id="nav-tabContent">-->
 
-        <div><h1 class="text-dark">Liste des processus :</h1><br></div>
+  <div class="mt-4"><h1 class="text-dark">Liste des processus :</h1><br></div>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Select processus</mat-label>
-          <mat-select [(ngModel)]="serviceSelected" (ngModelChange)="onGetProcessus($event)">
-            <mat-option *ngFor="let s of serviceList" [value]="s" >
-              {{s.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select processus</mat-label>
+    <mat-select [(ngModel)]="serviceSelected" (ngModelChange)="onGetProcessus($event)">
+      <mat-option *ngFor="let s of serviceList" [value]="s">
+        {{s.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-        <section id="cards" class="container pb-2">
-        <div class="row  d-inline-flex">
-          <!--          <div *ngIf="processusList; else log" >-->
+  <section id="cards" class="container-fluid pb-2">
+    <div class="row">
+      <!--          <div *ngIf="processusList; else log" >-->
 
-            <div *ngFor="let p of processusList" class="col-6 col-sm-4 col-md-3 p-2">
-              <div class="card border-primary h-100">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <h5 class="card-title text-primary">{{p.name}}</h5>
-                  <p class="card-text text-light">{{p.description}}.</p>
-                  <a href="#" class="btn btn-primary btn-sm mt-auto">Afficher plus</a><br>
+      <div *ngFor="let p of processusList" class="col-6 col-sm-4 col-md-3 p-2">
+        <div class="card border-primary h-100">
+          <div class="card-body d-flex flex-column align-items-start">
+            <h5 class="card-title text-primary">{{p.name}}</h5>
+            <p class="card-text text-light">{{p.description}}.</p>
+            <a href="#" class="btn btn-primary btn-sm mt-auto">Afficher plus</a><br>
 
-                  <div class="float-right btn-group btn-group-sm">
-                    <a class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
-                       data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                    <a class="btn btn-danger tooltips" data-placement="top" data-toggle="tooltip"
-                       data-original-title="Delete"><i class="fa fa-times"></i></a>
-                  </div>
-
-                </div>
-              </div>
+            <div *ngIf="isAdmin" class="float-right btn-group btn-group-sm">
+              <a class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
+                 data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+              <a class="btn btn-danger tooltips" data-placement="top" data-toggle="tooltip"
+                 data-original-title="Delete"><i class="fa fa-times"></i></a>
             </div>
+
           </div>
-        </section>
-
-        <div class=" d-flex  text-center  ">
-          <button (click)="onOpenModalAddProcessus()" class="btn btn-light border-primary border-8 "
-          ><i class="" style="color: Dodgerblue;"></i> Ajouter Processus</button>
         </div>
-
-
-<!--          <div class="col-md-3 mx-0 px-0 ">-->
-<!--            <div class="card border-0 px-0">-->
-<!--              <div class="card-body d-flex justify-content-center text-center  ">-->
-<!--                <button (click)="onOpenModalAddProcessus()" class="btn border-primary border-8 rounded-circle"-->
-<!--                        style="height: 89px;"><i class="fa fa-plus fa-5x  " style="color: Dodgerblue;"></i></button>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-          <!--          </div>-->
-        </div>
-
-
-<!--      </div>-->
-
+      </div>
     </div>
+  </section>
 
+  <div *ngIf="isAdmin" class=" d-flex  text-center  ">
+    <button (click)="onOpenModalAddProcessus()" class="btn btn-light border-primary border-8 "
+    ><i class="" style="color: Dodgerblue;"></i> Ajouter Processus
+    </button>
   </div>
 
 
+  <!--          <div class="col-md-3 mx-0 px-0 ">-->
+  <!--            <div class="card border-0 px-0">-->
+  <!--              <div class="card-body d-flex justify-content-center text-center  ">-->
+  <!--                <button (click)="onOpenModalAddProcessus()" class="btn border-primary border-8 rounded-circle"-->
+  <!--                        style="height: 89px;"><i class="fa fa-plus fa-5x  " style="color: Dodgerblue;"></i></button>-->
+  <!--              </div>-->
+  <!--            </div>-->
+  <!--          </div>-->
+
+  <!--          </div>-->
+</div>
 
 
+<!--      </div>-->
 
 
 <!--Modal add Processus-->
@@ -109,22 +100,24 @@
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" ngModel name="description" class="form-control" id="description" placeholder="description"
-                   required>
+            <!--            <input type="text" ngModel name="description" class="form-control" id="description" placeholder="description"-->
+            <!--                   required>-->
+            <textarea ngModel name="description" class="form-control" id="description" placeholder="description"
+                      required></textarea>
           </div>
           <div class="form-group">
             <label for="FormControlSelect1">Service </label>
-            <select   name="service" [(ngModel)]="service"  class="form-control" id="FormControlSelect1" >
-              <option selected disabled>selectionner le service </option>
+            <select name="service" [(ngModel)]="service" class="form-control" id="FormControlSelect1">
+              <option selected disabled>selectionner le service</option>
               <option *ngFor="let s of serviceList" [ngValue]="s">{{s.name}}</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="FormControlSelect1">Pilote de processus </label>
-            <select   name="service" class="form-control" id="FormControlSelect2" >
-              <option selected disabled>selectionner le pilote </option>
-              <option  ></option>
+            <select name="service" class="form-control" id="FormControlSelect2">
+              <option selected disabled>selectionner le pilote</option>
+              <option></option>
             </select>
           </div>
           <div class="modal-footer">

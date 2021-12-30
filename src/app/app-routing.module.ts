@@ -11,6 +11,7 @@ import {HomeComponent} from "./home/home.component";
 import {UserGuardService as guard} from "./guards/user-guard.service";
 import {GestionComponent} from "./gestion/gestion.component";
 import {TestoComponent} from "./testo/testo.component";
+import {ProfileviewComponent} from "./profileview/profileview.component";
 
 
 const routes: Routes = [
@@ -23,20 +24,21 @@ const routes: Routes = [
 
   { path:"login", component: LoginComponent},
 
-  { path:"testo", component: TestoComponent ,
-    canActivate: [guard], data: {expectedRole : ['admin']}},
+
 
   { path:"gestion", component: GestionComponent,
-    canActivate: [guard], data: {expectedRole : ['admin']} ,
+    canActivate: [guard], data: {expectedRole : ['admin','user']} ,
     children: [
       { path:"processus", component: CoProcessusComponent,
         canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
       { path:"documents",  component: CoDocumentsComponent,
         canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
       { path:"users", component: CoUsersComponent,
-        canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+        canActivate: [guard], data: {expectedRole : ['admin']} },
       { path:"services", component: CoServicesComponent,
-        canActivate: [guard], data: {expectedRole : ['admin']} }
+        canActivate: [guard], data: {expectedRole : ['admin', 'user']} },
+      { path:"testo", component: ProfileviewComponent ,
+        canActivate: [guard], data: {expectedRole : ['admin','user']}}
 
     ]
   }

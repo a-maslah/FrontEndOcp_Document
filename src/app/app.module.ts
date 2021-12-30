@@ -30,6 +30,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import { TestoComponent } from './testo/testo.component';
 import {SenderService} from "./services/sender.service";
+import { ProfileviewComponent } from './profileview/profileview.component';
 
 
 
@@ -48,6 +49,7 @@ import {SenderService} from "./services/sender.service";
     HomeComponent,
     GestionComponent,
     TestoComponent,
+    ProfileviewComponent,
 
 
 

@@ -15,6 +15,7 @@ export class ProcessusService {
   constructor(private http: HttpClient) { }
 
   public getProcessusByService(service:Service): Observable<Processus[]> {
+    console.log(service)
     return this.http.post<Processus[]>(`${this.host}/processus/by-service`,service);
   }
 

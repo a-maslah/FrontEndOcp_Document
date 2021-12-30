@@ -1,7 +1,40 @@
-@import "~@ng-select/ng-select/themes/default.theme.css";
+
 
 
 /* You can add global styles to this file, and also import other style files */
+
+
+
+
+
+/*body {*/
+/*  background-image: linear-gradient(#FFFFFF, rgb(255, 122, 89));*/
+/*}*/
+
+
+/*#leftHalf {*/
+/*  background:  rgb(198, 57, 89);*/
+/*  width: 20%;*/
+/*  position: absolute;*/
+/*  left: 0px;*/
+/*  height: 100%;*/
+/*}*/
+/*#rightHalf {*/
+/*  background:rgb(57, 122, 89);*/
+/*  width: 80%;*/
+/*  position: absolute;*/
+/*  right: 0px;*/
+/*  height: 100%;*/
+/*}*/
+
+
+
+
+
+
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 .border-8{
   border-style:solid;
   border-width: 8px;
@@ -35,26 +68,6 @@ html {
   background-color: rgb(241, 243, 247);
 }
 
-
-/*body {*/
-/*  background-image: linear-gradient(#FFFFFF, rgb(255, 122, 89));*/
-/*}*/
-
-
-/*#leftHalf {*/
-/*  background:  rgb(198, 57, 89);*/
-/*  width: 20%;*/
-/*  position: absolute;*/
-/*  left: 0px;*/
-/*  height: 100%;*/
-/*}*/
-/*#rightHalf {*/
-/*  background:rgb(57, 122, 89);*/
-/*  width: 80%;*/
-/*  position: absolute;*/
-/*  right: 0px;*/
-/*  height: 100%;*/
-/*}*/
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

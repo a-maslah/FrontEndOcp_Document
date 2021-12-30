@@ -8,6 +8,7 @@ import {NgForm} from "@angular/forms";
 import {User} from "../modal/user";
 import {ProcessusService} from "../services/processus.service";
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import {TokenService} from "../services/security/token.service";
 
 
 
@@ -22,6 +23,11 @@ export class CoServicesComponent implements OnInit {
   public deleteService!: Service;
   public allProcessusList: Processus[]=[];
 
+
+
+  isAdmin = false;
+  roles!: string[]
+
   // dropdownList = [];
   // selectedItems :Processus[]= [];
   // dropdownSettings!:IDropdownSettings
@@ -29,7 +35,9 @@ export class CoServicesComponent implements OnInit {
 
 
 
-  constructor(private serviceService: ServiceService,private processusService : ProcessusService ,private senderService : SenderService) {
+  constructor(private serviceService: ServiceService,private processusService : ProcessusService ,
+              private senderService : SenderService,
+              private tokenService: TokenService) {
     this.serviceList=[];
   }
 
@@ -37,6 +45,14 @@ export class CoServicesComponent implements OnInit {
 
   ngOnInit() {
     this.getService();
+    this.roles=this.tokenService.getAuthorities();
+    this.roles.forEach(role=>{
+
+      if (role=== 'ROLE_ADMIN')
+        this.isAdmin=true;
+    })
+   // this.isAdmin = this.tokenService.isAdmin();
+  //  console.log(this.isAdmin + " admin")
 
 
 
