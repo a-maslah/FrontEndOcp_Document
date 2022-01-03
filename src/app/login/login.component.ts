@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {LoginUser} from "../modal/security/login-user";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {DataServiceService} from "../transaction/data-service.service";
+import {EventEmitterService} from "../services/event-emitter.service";
 
 
 @Component({
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     private tokenService :TokenService,
     private authService : AuthService,
     private router: Router,
-    private dataLogged: DataServiceService
+    private dataLogged: DataServiceService,
+    private eventEmitterService: EventEmitterService
   ) { }
 
   ngOnInit() {
@@ -50,8 +52,9 @@ export class LoginComponent implements OnInit {
 
         this.isLogged = true;
         this.isLoginFail =false;
-        console.log(response.user.profileImageUrl)
-        this.tokenService.setUser(response.user);
+        //console.log(response.user.getProfileImageUrl())
+        //this.tokenService.setUser(response.user);
+        this.tokenService.setUserProfile(response.user)
         this.tokenService.setToken(response.token);
         this.tokenService.setUserName(response.username);
         this.tokenService.setAuthorities(response.authorities);
@@ -60,6 +63,9 @@ export class LoginComponent implements OnInit {
 
         this.roles = response.authorities;
         this.dataLogged.changeLogged(this.isLogged);
+
+        this.eventEmitterService.onFirstCompButtonLoginClick();
+
         this.router.navigate(['/home']);
       },
       error => {

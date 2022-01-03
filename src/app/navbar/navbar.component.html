@@ -1,0 +1,89 @@
+
+
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+
+<!--  <a class="navbar-brand" routerLink="/home">-->
+<!--    <img  class="d-inline-block align-top log" alt="">-->
+<!--    OCP-->
+<!--  </a>-->
+<!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--    <span class="navbar-toggler-icon"></span>-->
+<!--  </button>-->
+
+<!--  <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--    <ul class="navbar-nav mr-auto">-->
+<!--      <li class="nav-item active">-->
+<!--        <a routerLinkActive="active" routerLink="/home" class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>-->
+<!--      </li>-->
+<!--      <li  class="nav-item" *ngIf="isLogged">-->
+<!--        <a  class="nav-link" routerLink="/gestion" >Gestion</a>-->
+<!--      </li>-->
+<!--      <li  class="nav-item" >-->
+<!--        <a  class="nav-link" routerLink="/" >A propos</a>-->
+<!--      </li>-->
+<!--      <li  class="nav-item" >-->
+<!--        <a  class="nav-link" routerLink="/" >Contact</a>-->
+<!--      </li>-->
+<!--&lt;!&ndash;      <li class="nav-item dropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&ndash;&gt;-->
+<!--&lt;!&ndash;          Dropdown&ndash;&gt;-->
+<!--&lt;!&ndash;        </a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="dropdown-menu" aria-labelledby="navbarDropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="dropdown-item" href="#">Action</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="dropdown-item" href="#">Another action</a>&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="dropdown-divider"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="dropdown-item" href="#">Something else here</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </li>&ndash;&gt;-->
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link " routerLink="/testo" href="#">Disabled</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--    <form class="form-inline my-2 my-lg-0">-->
+<!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--    </form>-->
+<!--    <button  *ngIf="!isLogged" routerLinkActive="active" routerLink="/login" class="btn btn-light ms-3" >Login</button>-->
+<!--    <button (click)="onLogOut()"  *ngIf="isLogged"  class="btn btn-light ms-3" >Logout</button>-->
+<!--  </div>-->
+<!--</nav>-->
+
+
+
+
+
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+  <a routerLink="/home" class="navbar-brand"><i class="fa fa-cube"></i>OCP<b>Group</b></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Collection of nav links, forms, and other content for toggling -->
+  <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+    <form class="navbar-form form-inline">
+      <div class="input-group search-box">
+        <input type="text" id="search" class="form-control" placeholder="Search here...">
+        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+      </div>
+    </form>
+
+    <div class="navbar-nav ml-auto">
+      <a routerLink="/home" class="nav-item nav-link active"><i class="fa fa-home"></i><span>Accueil</span></a>
+      <a *ngIf="isLogged" routerLink="/gestion" class="nav-item nav-link"><i class="fa fa-gears"></i><span>GESTION</span></a>
+      <a  routerLink="/about" class="nav-item nav-link"><i class="fa fa-users"></i><span>Apropos</span></a>
+      <a routerLink="/contact" class="nav-item nav-link"><i class="fa fa-envelope"></i><span>Contact</span></a>
+      <a routerLink="/" class="nav-item nav-link"><i class="fa fa-bell"></i><span>Notifications</span></a>
+      <a  *ngIf="!isLogged" routerLink="/login" class="nav-item nav-link"><i class="fa fa-sign-in"></i><span>Login</span></a>
+
+      <div *ngIf="isLogged" class="nav-item dropdown">
+        <a href="#" style="font-family: 'Poppins', Comfortaa, sans-serif"  data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action font-weight-bold"><img src={{imageUrl}} class="avatar" alt="Avatar"> {{firstname+ ' '+lastname}} <b class="caret"></b></a>
+        <div class="dropdown-menu">
+          <a routerLink="/gestion/profileView" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+          <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a>
+          <a  (click)="ontest()" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+          <div class="divider dropdown-divider"></div>
+          <a  routerLink="/login" (click)="onLogOut()" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

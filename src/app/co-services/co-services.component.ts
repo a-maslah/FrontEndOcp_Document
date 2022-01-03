@@ -28,6 +28,9 @@ export class CoServicesComponent implements OnInit {
   isAdmin = false;
   roles!: string[]
 
+
+
+
   // dropdownList = [];
   // selectedItems :Processus[]= [];
   // dropdownSettings!:IDropdownSettings
@@ -45,9 +48,9 @@ export class CoServicesComponent implements OnInit {
 
   ngOnInit() {
     this.getService();
+
     this.roles=this.tokenService.getAuthorities();
     this.roles.forEach(role=>{
-
       if (role=== 'ROLE_ADMIN')
         this.isAdmin=true;
     })

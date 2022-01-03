@@ -11,7 +11,12 @@ import {HomeComponent} from "./home/home.component";
 import {UserGuardService as guard} from "./guards/user-guard.service";
 import {GestionComponent} from "./gestion/gestion.component";
 import {TestoComponent} from "./testo/testo.component";
-import {ProfileviewComponent} from "./profileview/profileview.component";
+import {ProfileviewComponent} from "./gestion/profileview/profileview.component";
+import {ProfileditComponent} from "./gestion/profiledit/profiledit.component";
+import {ContactComponent} from "./contact/contact.component";
+import {AboutComponent} from "./about/about.component";
+import {DetailProcessusComponent} from "./detail-processus/detail-processus.component";
+import {DetailServiceComponent} from "./detail-service/detail-service.component";
 
 
 const routes: Routes = [
@@ -24,21 +29,28 @@ const routes: Routes = [
 
   { path:"login", component: LoginComponent},
 
-
+  { path:"contact", component: ContactComponent},
+  { path:"about", component: AboutComponent},
 
   { path:"gestion", component: GestionComponent,
-    canActivate: [guard], data: {expectedRole : ['admin','user']} ,
+    canActivate: [guard], data: {expectedRole : ['admin','user','pilote']} ,
     children: [
       { path:"processus", component: CoProcessusComponent,
-        canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+        canActivate: [guard], data: {expectedRole : ['admin' , 'user','pilote']} },
       { path:"documents",  component: CoDocumentsComponent,
-        canActivate: [guard], data: {expectedRole : ['admin' , 'user']} },
+        canActivate: [guard], data: {expectedRole : ['admin' , 'user','pilote']} },
       { path:"users", component: CoUsersComponent,
-        canActivate: [guard], data: {expectedRole : ['admin']} },
+        canActivate: [guard], data: {expectedRole : ['admin','pilote']} },
       { path:"services", component: CoServicesComponent,
-        canActivate: [guard], data: {expectedRole : ['admin', 'user']} },
-      { path:"testo", component: ProfileviewComponent ,
-        canActivate: [guard], data: {expectedRole : ['admin','user']}}
+        canActivate: [guard], data: {expectedRole : ['admin', 'user','pilote']} },
+      { path:"detailProcessus", component: DetailProcessusComponent ,
+        canActivate: [guard], data: {expectedRole : ['admin','user','pilote']}},
+      { path:"detailService", component: DetailServiceComponent ,
+        canActivate: [guard], data: {expectedRole : ['admin','user','pilote']}},
+      { path:"profileView", component: ProfileviewComponent ,
+        canActivate: [guard], data: {expectedRole : ['admin','user','pilote']}},
+      { path:"profileEdit", component: ProfileditComponent ,
+        canActivate: [guard], data: {expectedRole : ['admin','user','pilote']}}
 
     ]
   }

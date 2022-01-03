@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {User} from "../modal/user";
 import {Observable} from "rxjs";
+import {Processus} from "../modal/processus";
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,8 @@ export class UserService {
   }
 
 
+    getUsersByProcessus(pId: number):Observable<User[]> {
+      return this.http.post<User[]>(`${this.host}/user/by-processus`,pId);
+
+    }
 }

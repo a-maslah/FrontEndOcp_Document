@@ -12,6 +12,7 @@ import {Service} from "../modal/service";
 import {Processus} from "../modal/processus";
 import {ProcessusService} from "../services/processus.service";
 import * as _ from 'lodash';
+import {TokenService} from "../services/security/token.service";
 
 
 export  interface PeriodicElement {
@@ -23,19 +24,13 @@ export  interface PeriodicElement {
 }
 
 
+interface MyObj {
+  id: number;
+  roleName: string;
+}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+
+
 
 @Component({
   selector: 'app-co-users',
@@ -46,7 +41,7 @@ export class CoUsersComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email','roles', 'edit', 'delete'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email','role', 'edit', 'delete'];
  // dataSource = ELEMENT_DATA;
 
 
@@ -67,22 +62,52 @@ export class CoUsersComponent implements OnInit {
 
   @ViewChild('paginator') paginator! : MatPaginator
 
-
+  rolesUser!: string[]
 
   public rolesList!: string[];
   private roleUser!: string;
+  isAdmin: boolean = false;
+  isPilote: boolean = false;
+   processusIdUser!: number;
+   nameProcessusForUser!: string;
 
   constructor(public processusService: ProcessusService, public userService:UserService,
-              private    modalService:NgbModal ) {
+              private    modalService:NgbModal ,
+              private tokenService: TokenService) {
     this.users=[];
   }
 
   ngOnInit(): void {
+    this.getRoleUser();
+    this.nameProcessusForUser =<string> sessionStorage.getItem('ProcessusName');
+    this.processusIdUser = Number(sessionStorage.getItem('ProcessusID'));
+
+
+    if (this.isAdmin)
     this.getUsers();
+    else if (this.isPilote) {
+      this.processusSelected = this.processusIdUser;
+      this.onGetUsers(this.processusIdUser)
+    }
+
     this.getProcessus();
 
 
-    this.rolesList=['admin','user'];
+    this.rolesList=['Administrateur','employee','pilote'];
+  }
+
+
+  getRoleUser() {
+    this.rolesUser = this.tokenService.getAuthorities();
+    this.rolesUser.forEach(role => {
+      if (role === 'ROLE_ADMIN') {
+        this.isAdmin = true;
+      }
+      if (role === 'ROLE_PILOTE') {
+        this.isPilote = true;
+      }
+
+    });
   }
 
 
@@ -92,8 +117,7 @@ export class CoUsersComponent implements OnInit {
     this.processusService.getAllProcessus().subscribe(
       (response) => {
         this.processusList = response;
-        console.log("processus: ")
-        console.log(this.processusList)
+
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -101,13 +125,40 @@ export class CoUsersComponent implements OnInit {
     )
   }
 
+rol!:string
+
 
   public getUsers(): void{
     this.userService.getUsers().subscribe(
       (response: User[]) => {
-        console.log(response)
+
         //this.dataSource.data = response;
         this.users = response;
+        this.users.forEach((user:User)=> {
+
+          user.roles.forEach(r=>{
+            if (r.roleName==='ROLE_ADMIN'){
+              user.role='Administrateur'
+            }
+            if (r.roleName==='ROLE_USER'){
+              user.role='Employee'
+            }
+            if (r.roleName==='ROLE_PILOTE'){
+              user.role='Pilote'
+            }
+
+          })
+
+
+          // if (this.rol.indexOf("ROLE_USER")){
+          //   user.role='Employee'
+          //   console.log(this.rol)}
+          // if (this.rol.indexOf("ROLE_PILOTE")){
+          //   user.role='Pilote'
+          //   console.log(this.rol)}
+
+        });
+        console.log(this.users)
         this.apiResponce = response
         this.dataSource.data=response;
         this.dataSource.paginator = this.paginator;
@@ -121,15 +172,18 @@ export class CoUsersComponent implements OnInit {
   }
 
 
-  public onAddUser(addForm: NgForm): void{
-    // @ts-ignore
+  public onAddUser(addForm: NgForm,user:User): void{
 
+
+    // @ts-ignore
     document.getElementById('add-user-form').click();
-    console.log(addForm.value);
-    this.userService.addUser(addForm.value).subscribe(
+
+
+    console.log(user);
+    this.userService.addUser(this.user1).subscribe(
       (response: User) => {
 
-        console.log(addForm.value);
+      console.log(response)
         this.getUsers();
         addForm.reset();
       },
@@ -144,7 +198,7 @@ export class CoUsersComponent implements OnInit {
 
     this.userService.updateUser(user).subscribe(
       (response: User) => {
-        console.log(response);
+
         this.getUsers();
       },
       (error : HttpErrorResponse) => {
@@ -157,7 +211,7 @@ export class CoUsersComponent implements OnInit {
 
     this.userService.deleteUser(userId).subscribe(
       (response: void) => {
-        console.log(response);
+
         this.getUsers();
       },
       (error : HttpErrorResponse) => {
@@ -225,16 +279,10 @@ export class CoUsersComponent implements OnInit {
   //     return `with: ${reason}`;
   //   }
   // }
-  processusSelected!: Processus;
+  processusSelected!: number;
 
 
-  changeUser($event: Event) {
-    console.log($event)
-  }
 
-  onSubmit() {
-console.log(this.user1)
-  }
 
 
   filterData($event: any) {
@@ -248,7 +296,31 @@ console.log(this.user1)
     this.dataSource = new MatTableDataSource(filterData);
   }
 
-  onGetUsers(p: Processus) {
-      this.dataSource.data
+
+
+
+  onGetUsers(p: any) {
+    if (p==0){
+      this.getUsers()
+    }
+    else
+      this.getUsersByProcessus(p);
+      //this.dataSource.data
+  }
+
+  onChangeProcessus(p: Processus) {
+    this.user1.processus=p;
+
+  }
+
+  private getUsersByProcessus(pId: number) {
+    this.userService.getUsersByProcessus(pId).subscribe(
+      (response:User[]) => {
+        this.dataSource.data = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
   }
 }

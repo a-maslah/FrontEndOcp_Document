@@ -40,6 +40,8 @@ export class FileUploadService {
   //   return this.http.post<any>(`${this.baseUrl}/resources/filestype`,type_doc);
   // }
    getFilesByTypeDoc(dataFile: DataFile):Observable<any> {
+    console.log(dataFile.type_doc+" getFilesByTypeDoc")
+
     return this.http.post<any>(`${this.baseUrl}/resources/filestype/`,dataFile);
   }
 

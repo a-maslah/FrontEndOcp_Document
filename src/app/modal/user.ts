@@ -4,8 +4,8 @@ export class User {
 
 
   constructor(firstName: string, lastName: string, username: string, password: string, email: string, roles: string[]) {
-    this._firstName = firstName;
-    this._lastName = lastName;
+    this.firstname = firstName;
+    this.lastname = lastName;
     this.username = username;
     this.password = password;
     this.email = email;
@@ -14,43 +14,80 @@ export class User {
   }
 
 
-  public  get firstName(): string {
-    return this._firstName;
+  getEmail(): string {
+    return this.email;
   }
 
-  public set firstName(value: string) {
-    this._firstName = value;
+  setEmail(value: string) {
+    this.email = value;
   }
 
-  public get lastName(): string {
-    return this._lastName;
+  getPhone(): string {
+    return this.phone;
   }
 
-  public set lastName(value: string) {
-    this._lastName = value;
+  setPhone(value: string) {
+    this.phone = value;
+  }
+
+  getAdresse(): string {
+    return this.adresse;
+  }
+
+  setAdresse(value: string) {
+    this.adresse = value;
+  }
+
+  getProcessus(): Processus {
+    return this.processus;
+  }
+
+  setProcessus(value: Processus) {
+    this.processus = value;
+  }
+
+  public  getFirstName(): string {
+    return this.firstname;
+  }
+
+  public setFirstName(value: string) {
+    this.firstname = value;
+  }
+
+  public getLastName(): string {
+    return this.lastname;
+  }
+
+  public setLastName(value: string) {
+    this.lastname = value;
   }
 
 
-  get profileImageUrl(): string {
-    return this._profileImageUrl;
+  getProfileImageUrl(): string {
+    return this.profileImageUrl;
   }
 
-  set profileImageUrl(value: string) {
-    this._profileImageUrl = value;
+
+
+  setProfileImageUrl(value: string) {
+    this.profileImageUrl = value;
   }
 
   id!: number ;
-  private _firstName! : string;
-  private _lastName! : string;
+   firstname! : string;
+   lastname! : string;
   username! : string;
   password! : string;
-  email! : string;
-  private _profileImageUrl! : string;
-  roles: string[
+   email! : string;
+   phone! : string;
+   adresse!: string;
+
+   profileImageUrl! : string;
+  roles: any[
 
     ];
   role!: string;
-  processus!: Processus;
+   processus!: Processus;
 
 
 }

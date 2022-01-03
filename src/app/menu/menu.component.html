@@ -1,0 +1,59 @@
+<!--<ul class="list-group">-->
+<!--  <li  [ngClass]="'service'==current?'active':''"  routerLink="/gestion/services" class="list-group-item clickable text-center  " (click)="onClick('service')" >Services</li>-->
+<!--  <li  [ngClass]="'processus'==current?'active':''" routerLink="/gestion/processus" class="list-group-item clickable text-center" (click)="onClick('processus')" >Processus</li>-->
+<!--  <li  [ngClass]="'user'==current?'active':''" routerLink="/gestion/users" class="list-group-item clickable  text-center" (click)="onClick('user')" >Utlisateurs</li>-->
+<!--  <li  [ngClass]="'document'==current?'active':''" routerLink="/gestion/documents" class="list-group-item clickable text-center" (click)="onClick('document')" >Documents</li>-->
+<!--</ul>-->
+
+
+<nav id="sidebar" class=" mw-100" >
+  <div class="custom-menu">
+    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+    </button>
+  </div>
+  <div class="img bg-wrap text-center py-4" style="background-image: url('https://ocpsiteprodsa.blob.core.windows.net/media/spirograph-slides/OCP%20-%20STAGE%202%20-%202304_0.jpg');">
+    <div class="user-logo">
+      <div class="img" [ngStyle]="{'background-image': 'url(' + imageUrl + ')'}" ></div>
+      <h3 class="">{{firstname + ' ' + lastname}}</h3>
+    </div>
+  </div>
+  <ul  class="list-unstyled components mb-5">
+    <li class="bg-primary" [ngClass]="'service'==current?'active':''" routerLink="/gestion/services" (click)="onClick('service')" >
+      <a ><span class="fa fa-cog mr-3"></span> Services</a>
+    </li>
+    <li class="bg-primary" [ngClass]="'processus'==current?'active':''"  routerLink="/gestion/processus" (click)="onClick('processus')" >
+      <a ><span class="fa fa-gift mr-3"></span> Processus</a>
+    </li>
+    <li *ngIf="isAdminOrPilote" class="bg-primary" [ngClass]="'user'==current?'active':''" routerLink="/gestion/users" (click)="onClick('user')" >
+      <a ><span class="fa fa-users mr-3"></span> Utlisateurs</a>
+    </li>
+    <li  routerLink="/gestion/documents" class="bg-primary " [ngClass]="'document'==current?'active':''"   >
+      <a href="#docSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" ><span class="fa fa-file-text-o mr-3"></span> Documents</a>
+      <ul class="collapse list-unstyled" id="docSubmenu">
+        <li  class="" [ngClass]="'fiche'==current?'active':''" >
+          <a  (click)="onClickSubmenu('fiche')">Fiches Processus</a>
+        </li>
+        <li [ngClass]="'procedure'==current?'active':''" >
+          <a  (click)="onClickSubmenu('procedure')" >Procedures</a>
+        </li>
+        <li [ngClass]="'modeOpera'==current?'active':''" >
+          <a (click)="onClickSubmenu('modeOpera')" >Modes Operatoires</a>
+        </li >
+        <li [ngClass]="'enregistrement'==current?'active':''" >
+          <a  (click)="onClickSubmenu('enregistrement')">Enregistrements</a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="bg-primary">
+      <a ><span class="fa fa-download mr-3 "><small class="d-flex align-items-center justify-content-center"></small></span> Download</a>
+    </li>
+    <li class="bg-primary">
+      <a ><span class="fa fa-support mr-3"></span> Support</a>
+    </li>
+    <li class="bg-primary">
+      <a ><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+    </li>
+  </ul>
+
+</nav>

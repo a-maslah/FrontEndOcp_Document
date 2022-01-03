@@ -1,0 +1,25 @@
+/*.content_center {*/
+/*  display: flex;*/
+
+/*  align-items: center;*/
+/*  width: 250px;*/
+/*  height: 150px;*/
+
+/*}*/
+
+#channelName {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+  horiz-align: center;
+  height:100%;
+  width:100%;
+
+}

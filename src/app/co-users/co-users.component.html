@@ -52,12 +52,23 @@
                  <input matInput placeholder="search" autocomplete="off" (keyup)="filterData($event)">
                </mat-form-field>
 
-               <mat-form-field appearance="fill">
+
+
+               <mat-form-field *ngIf="isAdmin" appearance="fill">
                  <mat-label>Select processus</mat-label>
                  <mat-select [(ngModel)]="processusSelected" (ngModelChange)="onGetUsers($event)">
-                   <mat-option *ngFor="let p1 of processusList" [value]="p1" >
+                   <mat-option selected="" [value]=0 >All</mat-option>
+                   <mat-option *ngFor="let p1 of processusList" [value]="p1.id" >
                      {{p1.name}}
                    </mat-option>
+                 </mat-select>
+               </mat-form-field>
+
+               <mat-form-field *ngIf="isPilote" appearance="fill">
+                 <mat-label>Select processus</mat-label>
+                 <mat-select [(ngModel)]="processusSelected" (ngModelChange)="onGetUsers($event)">
+                   <mat-option selected  [value]=processusIdUser > {{nameProcessusForUser}}</mat-option>
+
                  </mat-select>
                </mat-form-field>
 
@@ -99,9 +110,9 @@
                   <th class="font-weight-bold text-dark" mat-header-cell *matHeaderCellDef> Email </th>
                   <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                 </ng-container>
-                <ng-container matColumnDef="roles">
+                <ng-container matColumnDef="role">
                   <th class="font-weight-bold text-dark" mat-header-cell *matHeaderCellDef> Role </th>
-                  <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.role}} </td>
                 </ng-container>
 <!--                <ng-container matColumnDef="processus">-->
 <!--                  <th class="font-weight-bold text-dark" mat-header-cell *matHeaderCellDef> Processus </th>-->
@@ -214,16 +225,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
+        <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm,user1)">
           <div class="form-group">
-            <label for="firstname">FirstName</label>
-            <input type="text" [(ngModel)]="user1.firstName" name="firstname" class="form-control" id="firstname" placeholder="FirstName"
+            <label for="firstName">FirstName</label>
+            <input type="text" [(ngModel)]="user1.firstname" name="firstName" class="form-control" id="firstName" placeholder="FirstName"
                    required>
           </div>
 
           <div class="form-group">
             <label for="lastname">LastName</label>
-            <input type="text" [(ngModel)]="user1.lastName" name="lastname"  class="form-control" id="lastname" placeholder="LastName"
+            <input type="text" [(ngModel)]="user1.lastname" name="lastname" class="form-control" id="lastname" placeholder="LastName"
                    required>
           </div>
           <div class="form-group">
@@ -250,7 +261,7 @@
           </div>
           <div class="form-group">
             <label for="FormControlSelect1">Processus </label>
-            <select   name="processus" [(ngModel)]="user1.processus"  class="form-control" id="FormControlSelect1" >
+            <select   name="processus" [(ngModel)]="user1.processus" (ngModelChange)="onChangeProcessus($event)"  class="form-control" id="FormControlSelect1" >
               <option selected disabled>selectionner le service </option>
               <option *ngFor="let p of processusList" [ngValue]="p">{{p.name}}</option>
             </select>
@@ -280,8 +291,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateUserModalLabel">Edit
-          Employee {{editUser?.firstName + ' ' + editUser?.lastName}} </h5>
+        <h5 class="modal-title" id="updateUserModalLabel">Modifier l'utilisateur {{editUser?.firstname + ' ' + editUser?.lastname}} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -290,12 +300,12 @@
         <form #editForm="ngForm">
           <div class="form-group">
             <label for="firstName">FirstName</label>
-            <input type="text" ngModel="{{editUser?.firstName}}" name="firstname" class="form-control"
+            <input type="text" ngModel="{{editUser?.firstname}}" name="firstname" class="form-control"
                    aria-describedby="emailHelp" placeholder="Name">
           </div>
           <div class="form-group">
             <label for="lastName">LastName</label>
-            <input type="text" ngModel="{{editUser?.lastName}}" name="lastname" class="form-control"
+            <input type="text" ngModel="{{editUser?.lastname}}" name="lastname" class="form-control"
                    aria-describedby="emailHelp" placeholder="Name">
           </div>
           <input type="hidden" ngModel="{{editUser?.id}}" name="id" class="form-control" id="id" placeholder="Email">
@@ -338,7 +348,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete employee {{deleteUser?.firstName + ' ' + deleteUser?.lastName}}? </p>
+        <p>Are you sure you want to delete employee {{deleteUser?.firstname + ' ' + deleteUser?.lastname}}? </p>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
           <button (click)="onDeleteUser(deleteUser.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>

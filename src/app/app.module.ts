@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {EventEmitter, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +30,14 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import { TestoComponent } from './testo/testo.component';
 import {SenderService} from "./services/sender.service";
-import { ProfileviewComponent } from './profileview/profileview.component';
+import { ProfileviewComponent } from './gestion/profileview/profileview.component';
+import {ButtonsModule, InputsModule, WavesModule} from "angular-bootstrap-md";
+import { ProfileditComponent } from './gestion/profiledit/profiledit.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { DetailProcessusComponent } from './detail-processus/detail-processus.component';
+import { DetailServiceComponent } from './detail-service/detail-service.component';
+import {EventEmitterService} from "./services/event-emitter.service";
 
 
 
@@ -50,26 +57,34 @@ import { ProfileviewComponent } from './profileview/profileview.component';
     GestionComponent,
     TestoComponent,
     ProfileviewComponent,
+    ProfileditComponent,
+    ContactComponent,
+    AboutComponent,
+    DetailProcessusComponent,
+    DetailServiceComponent,
 
 
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule, HttpClientModule, FormsModule,
-        NgbModule,
-        FormsModule,
-        MatButtonModule,
-        MatInputModule,
-        MatTableModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule, HttpClientModule, FormsModule,
+    NgbModule,
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatTableModule,
+    InputsModule,
+    WavesModule,
+    ButtonsModule,
 
-        MatSelectModule,
-        MatPaginatorModule,
-        MatSortModule
-        ,
-        ReactiveFormsModule, NgSelectModule, NgMultiSelectDropDownModule, BrowserAnimationsModule, MatIconModule
-    ],
-  providers: [interceptorProvider],
+    MatSelectModule,
+    MatPaginatorModule,
+    MatSortModule
+    ,
+    ReactiveFormsModule, NgSelectModule, NgMultiSelectDropDownModule, BrowserAnimationsModule, MatIconModule, InputsModule, InputsModule
+  ],
+  providers: [interceptorProvider,EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
