@@ -297,6 +297,27 @@ rol!:string
   }
 
 
+  exportUsers() {
+    this.userService.exportUserToExcel().subscribe(
+      (response: any) => {
+        const blobData = new Blob([response], { type: 'application/octet-stream' });
+        const url = window.URL.createObjectURL(blobData);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'users.xlsx';
+        link.click();
+        window.URL.revokeObjectURL(url);
+        link.remove();
+      },
+      (error: any) => {
+        console.error('Error exporting users:', error);
+        // Handle the error
+      }
+    );
+  }
+
+
+
 
 
   onGetUsers(p: any) {

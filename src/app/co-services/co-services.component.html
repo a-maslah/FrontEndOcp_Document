@@ -48,8 +48,8 @@
               <p class="card-text text-light">{{s.description}}.</p>
               <a routerLink="/gestion/detailService" class="btn btn-primary btn-sm mt-auto">Afficher plus</a>
               <br>
-              <div *ngIf="isAdmin" class="float-right btn-group btn-group-sm">
-                <a (click)="onOpenModalService(s,'edit')" class="btn btn-secondary tooltips" data-placement="top"
+              <div *ngIf="isAdmin" class="float-right btn-group btn-group-sm mr-3">
+                <a (click)="onOpenModalService(s,'edit')" class="btn btn-secondary tooltips mr-2" data-placement="top"
                    data-toggle="tooltip"
                    data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
                 <a (click)="onOpenModalService(s,'delete')" class="btn btn-danger tooltips" data-placement="top"

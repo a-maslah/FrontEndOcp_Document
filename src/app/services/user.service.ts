@@ -35,4 +35,9 @@ export class UserService {
       return this.http.post<User[]>(`${this.host}/user/by-processus`,pId);
 
     }
+    public exportUserToExcel(){
+      return this.http.get(`${this.host}/user/export/excel`, {
+        responseType: 'blob' as 'json' // Set the response type to 'blob'
+      });
+    }
 }
